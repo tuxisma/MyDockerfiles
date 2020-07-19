@@ -1,0 +1,16 @@
+FROM centos:7
+LABEL maintainer Ismael Garcia "tuxisma@gmail.com"
+
+RUN yum update -y \
+    && yum install -y https://repo.ius.io/ius-release-el7.rpm \
+    && yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+    && yum install -y python36u python36u-libs python36u-devel python36u-pip 
+
+# pipenv installation
+#RUN pip3.6 install pipenv
+RUN ln -s /usr/bin/pip3.6 /bin/pip
+RUN rm /usr/bin/python
+# python must be pointing to python3.6
+RUN ln -s /usr/bin/python3.6 /usr/bin/python
+#RUN pipenv install --python `which python3.6` --system
+
